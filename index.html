@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Form</title>
+</head>
+<body>
+    <form id="inputForm">
+        <label for="input">Enter text:</label><br>
+        <input type="text" id="input" name="input"><br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById("inputForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            // Get the input value
+            var inputText = document.getElementById("input").value;
+            
+            // Send the input to Discord webhook
+            sendToWebhook(inputText);
+        });
+
+        function sendToWebhook(text) {
+            var webhookURL = "https://discord.com/api/webhooks/1230905659277447179/J1FPXJvhRWZoLW6cAyhZ3Z3SuFXVLH57HxsxNsnwOYqQ22t4C4sXQul43fU3qXDQxQCr"; // Replace with your Discord webhook URL
+            
+            // Create a new XMLHttpRequest object
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", webhookURL, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            
+            // Construct JSON data
+            var jsonData = JSON.stringify({content: text});
+            
+            // Send the request
+            xhr.send(jsonData);
+        }
+    </script>
+</body>
+</html>
